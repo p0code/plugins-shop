@@ -86,3 +86,7 @@ PRs are checked by GitHub Actions; merging to `main` publishes `dist/` to GitHub
 `schemaVersion` changes only when an existing field changes meaning or is removed; new optional
 fields may appear without a bump. The entry schema is also served at
 `https://p0code.github.io/plugins-shop/plugin.schema.json`.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
