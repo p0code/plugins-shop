@@ -33,7 +33,7 @@ Open a PR that adds `plugins/<id>.json`, where `<id>` is your manifest's `id`:
   "repository": "https://github.com/you/my-plugin",
   "ref": "0123456789abcdef0123456789abcdef01234567",
   "version": "0.1.0",
-  "capabilities": ["network:outbound"],
+  "capabilities": ["network:outbound", "usage:read"],
   "externalServices": ["api.example.com"],
   "license": "MIT",
   "official": false,
@@ -46,6 +46,10 @@ Open a PR that adds `plugins/<id>.json`, where `<id>` is your manifest's `id`:
 - `ref` is a full commit SHA (preferred) or a tag; branches are refused. To ship an update, open a PR
   that bumps `ref` and `version`.
 - `version`, `capabilities` and `externalServices` are copied from your manifest at `ref`.
+- `capabilities` accepts the app's full set: `network:outbound`, `process:spawn`, `http:routes`,
+  `auth:issue-device-credentials`, `orchestration:read-activity`, `usage:read`,
+  `agent:instructions`, and `data:backup` (allowed ahead of its host API). Unknown capabilities are
+  rejected.
 - `path` is the folder holding the plugin's `package.json`, if it is not the repo root.
 - `license` is an SPDX expression, or `NOASSERTION` when the repo has none.
 - `homepage`, `icon` and `screenshots` are optional `https://` URLs.
