@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://p0code.github.io/plugins-shop/plugin.schema.json",
+  "title": "p0code plugin shop entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "description",
+    "author",
+    "repository",
+    "ref",
+    "version",
+    "capabilities",
+    "externalServices",
+    "license",
+    "official"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": {
+      "description": "The plugin manifest id. The file must be named plugins/<id>.json.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "name": { "type": "string", "minLength": 1, "pattern": "^\\S(.*\\S)?$" },
+    "description": { "type": "string", "minLength": 1, "pattern": "^\\S(.*\\S)?$" },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" }
+      }
+    },
+    "repository": {
+      "description": "The GitHub repo holding the plugin.",
+      "type": "string",
+      "pattern": "^https://github\\.com/[A-Za-z0-9-]+/[A-Za-z0-9._-]+$"
+    },
+    "path": {
+      "description": "Folder inside the repo that holds the plugin's package.json. Omit when it is the repo root.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*$"
+    },
+    "ref": {
+      "description": "A full commit SHA or a tag. Branches are refused.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/-]+$"
+    },
+    "version": {
+      "description": "The manifest version at ref.",
+      "type": "string",
+      "minLength": 1
+    },
+    "capabilities": {
+      "description": "Copied from the manifest at ref.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "network:outbound",
+          "process:spawn",
+          "http:routes",
+          "auth:issue-device-credentials",
+          "orchestration:read-activity",
+          "agent:instructions"
+        ]
+      }
+    },
+    "externalServices": {
+      "description": "Copied from the manifest at ref.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "license": {
+      "description": "SPDX expression, or NOASSERTION when the repo has no license.",
+      "type": "string",
+      "minLength": 1
+    },
+    "official": {
+      "description": "True only for repos owned by the p0code or jsserve-org orgs.",
+      "type": "boolean"
+    },
+    "homepage": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "icon": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "screenshots": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri", "pattern": "^https://" }
+    }
+  }
+}

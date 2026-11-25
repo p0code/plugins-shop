@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/plugin.schema.json",
+  "id": "t3-connect-bridge",
+  "name": "Unofficial T3 Connect bridge",
+  "description": "Links this environment to the official T3 Connect service, so T3 Code apps signed in to your T3 account can reach it and the store mobile app gets push notifications.",
+  "author": { "name": "p0code", "url": "https://github.com/p0code" },
+  "repository": "https://github.com/p0code/t3-connect-bridge",
+  "ref": "260da0053ca7632ed830bdca425a93341540cb3b",
+  "version": "0.1.0",
+  "capabilities": [
+    "network:outbound",
+    "process:spawn",
+    "http:routes",
+    "auth:issue-device-credentials",
+    "orchestration:read-activity"
+  ],
+  "externalServices": ["relay.t3.codes", "clerk.t3.codes", "Cloudflare Tunnel"],
+  "license": "NOASSERTION",
+  "official": true
+}
