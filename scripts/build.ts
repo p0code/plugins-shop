@@ -94,11 +94,16 @@ if (errors.length > 0) {
 const plugins = entries
   .map(({ $schema: _, ...entry }) => entry)
   .sort((a, b) => a.id.localeCompare(b.id));
+// `generatedAt` is the newest publishedAt in the catalog, so a rebuild is byte-identical and the
+// published index.json can be compared byte-for-byte against a local build.
+const generatedAt = entries
+  .flatMap((entry) => entry.versions.map((version) => version.publishedAt))
+  .reduce((latest, at) => (at > latest ? at : latest), "");
 const out = join(root, "dist");
 await mkdir(out, { recursive: true });
 await writeFile(
   join(out, "index.json"),
-  `${JSON.stringify({ schemaVersion: SCHEMA_VERSION, generatedAt: new Date().toISOString(), plugins }, null, 2)}\n`,
+  `${JSON.stringify({ schemaVersion: SCHEMA_VERSION, generatedAt, plugins }, null, 2)}\n`,
 );
 await copyFile(schemaPath, join(out, "plugin.schema.json"));
 await cp(join(root, "bundles"), join(out, "bundles"), { recursive: true, force: true });
