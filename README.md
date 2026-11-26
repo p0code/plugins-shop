@@ -97,12 +97,9 @@ merging to `main` publishes `dist/` (including `bundles/`) to GitHub Pages.
 
 ## Current entries
 
-`backup`, `obsidian-shared-memory` and `t3-connect-bridge` have prebuilt bundles in `bundles/`.
-The other first-party plugins do not have an installable bundle yet and are not listed:
-`tokscale-auto-publish-plugin` (no release asset and no checkout to build from),
-`sleep-guard` (no release asset; source-only mount), and `deploy-vercel` /
-`deploy-cloudflare` (no p0code-owned GitHub repo yet; both are local copies of plugin-template).
-Add them with `publish.ts` once their bundles are built.
+`backup`, `obsidian-shared-memory` and `t3-connect-bridge` have prebuilt bundles in `bundles/`;
+`tokscale-auto-publish`, `sleep-guard`, `vercel` and `cloudflare` point at GitHub release assets.
+Add a new release with `publish.ts` and `pnpm build` once its bundle is built.
 
 ## index.json
 

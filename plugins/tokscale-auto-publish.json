@@ -17,7 +17,7 @@
     "leaderboard",
     "usage"
   ],
-  "latestVersion": "0.1.0",
+  "latestVersion": "0.1.1",
   "versions": [
     {
       "version": "0.1.0",
@@ -29,6 +29,18 @@
       ],
       "sizeBytes": 7812,
       "publishedAt": "2026-11-26T19:01:02.727Z"
+    },
+    {
+      "version": "0.1.1",
+      "bundleUrl": "https://github.com/p0code/tokscale-auto-publish-plugin/releases/download/v0.1.1/tokscale-auto-publish-0.1.1.tgz",
+      "sha256": "d0e31aba0273d0785ed69587bbf82082058d12dad6816039fbbaa05acf35ea49",
+      "apiVersion": 1,
+      "capabilities": [
+        "network:outbound",
+        "usage:read"
+      ],
+      "sizeBytes": 7830,
+      "publishedAt": "2026-11-26T19:05:09.559Z"
     }
   ],
   "source": "official",
