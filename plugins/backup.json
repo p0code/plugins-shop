@@ -21,18 +21,19 @@
     "s3"
   ],
   "screenshotUrls": [],
-  "latestVersion": "0.1.0",
+  "latestVersion": "0.1.1",
   "versions": [
     {
-      "version": "0.1.0",
-      "bundleUrl": "https://p0code.github.io/plugins-shop/bundles/backup-0.1.0.tgz",
-      "sha256": "3cb025ab6f94c4d08c70b7d535b28c09611dc83b383dab8b291174458405fd14",
+      "version": "0.1.1",
+      "bundleUrl": "https://github.com/p0code/backup/releases/download/v0.1.1/backup-0.1.1.tgz",
+      "sha256": "34b87f8cc9a52a94c760cf43e0d58db3497ff89b04a0f129f633f7a911a875d1",
+      "apiVersion": 1,
       "capabilities": [
         "network:outbound",
         "data:backup"
       ],
-      "sizeBytes": 17517,
-      "publishedAt": "2026-11-26T17:43:26.242Z"
+      "sizeBytes": 18103,
+      "publishedAt": "2026-11-26T19:19:27.213Z"
     }
   ],
   "source": "official",

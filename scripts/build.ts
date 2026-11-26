@@ -106,7 +106,12 @@ await writeFile(
   `${JSON.stringify({ schemaVersion: SCHEMA_VERSION, generatedAt, plugins }, null, 2)}\n`,
 );
 await copyFile(schemaPath, join(out, "plugin.schema.json"));
-await cp(join(root, "bundles"), join(out, "bundles"), { recursive: true, force: true });
+// Bundles published straight to GitHub Pages live here; release-asset entries skip this.
+await cp(join(root, "bundles"), join(out, "bundles"), { recursive: true, force: true }).catch(
+  (cause: NodeJS.ErrnoException) => {
+    if (cause.code !== "ENOENT") throw cause;
+  },
+);
 console.log(`dist/index.json: ${plugins.length} plugin(s)`);
 
 // Each version's bundle must exist, match its checksum and size, and hold a manifest whose

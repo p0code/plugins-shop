@@ -21,12 +21,13 @@
     "push"
   ],
   "screenshotUrls": [],
-  "latestVersion": "0.1.0",
+  "latestVersion": "0.1.1",
   "versions": [
     {
-      "version": "0.1.0",
-      "bundleUrl": "https://p0code.github.io/plugins-shop/bundles/t3-connect-bridge-0.1.0.tgz",
-      "sha256": "2bb0d20411c41cc02f51c4bfa495c60d832e4b4ad180fb12c97a328287e86bdb",
+      "version": "0.1.1",
+      "bundleUrl": "https://github.com/p0code/t3-connect-bridge/releases/download/v0.1.1/t3-connect-bridge-0.1.1.tgz",
+      "sha256": "7332a253541c81ab7c3cf3477df4a5b2920dae3b340462c7abbda821dd7b5d16",
+      "apiVersion": 1,
       "capabilities": [
         "network:outbound",
         "process:spawn",
@@ -34,8 +35,8 @@
         "auth:issue-device-credentials",
         "orchestration:read-activity"
       ],
-      "sizeBytes": 16147,
-      "publishedAt": "2026-11-27T00:00:00.000Z"
+      "sizeBytes": 16707,
+      "publishedAt": "2026-11-26T19:19:28.294Z"
     }
   ],
   "source": "official",

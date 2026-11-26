@@ -21,19 +21,20 @@
     "agents"
   ],
   "screenshotUrls": [],
-  "latestVersion": "0.1.0",
+  "latestVersion": "0.1.1",
   "versions": [
     {
-      "version": "0.1.0",
-      "bundleUrl": "https://p0code.github.io/plugins-shop/bundles/obsidian-shared-memory-0.1.0.tgz",
-      "sha256": "535830a4b7133b8f56bd48678c6b41ad3cb8fd1ac2b03ee3e64abc6c82585e30",
+      "version": "0.1.1",
+      "bundleUrl": "https://github.com/p0code/obsidian-sync/releases/download/v0.1.1/obsidian-shared-memory-0.1.1.tgz",
+      "sha256": "23f174e381837d9a45fbbfcdb977e5039dd3830e226ffa44dc9c128f3049b1a3",
+      "apiVersion": 1,
       "capabilities": [
         "network:outbound",
         "process:spawn",
         "agent:instructions"
       ],
-      "sizeBytes": 13728,
-      "publishedAt": "2026-11-27T00:00:00.000Z"
+      "sizeBytes": 19167,
+      "publishedAt": "2026-11-26T19:19:27.749Z"
     }
   ],
   "source": "official",
