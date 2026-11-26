@@ -3,18 +3,41 @@
   "id": "t3-connect-bridge",
   "name": "Unofficial T3 Connect bridge",
   "description": "Links this environment to the official T3 Connect service, so T3 Code apps signed in to your T3 account can reach it and the store mobile app gets push notifications.",
-  "author": { "name": "p0code", "url": "https://github.com/p0code" },
-  "repository": "https://github.com/p0code/t3-connect-bridge",
-  "ref": "260da0053ca7632ed830bdca425a93341540cb3b",
-  "version": "0.1.0",
-  "capabilities": [
-    "network:outbound",
-    "process:spawn",
-    "http:routes",
-    "auth:issue-device-credentials",
-    "orchestration:read-activity"
-  ],
-  "externalServices": ["relay.t3.codes", "clerk.t3.codes", "Cloudflare Tunnel"],
+  "longDescription": "Publishes this p0code environment to the official T3 Connect relay, mints device credentials for signed-in T3 apps, and forwards push notifications for the mobile app. Unofficial: it is built by p0code, not by the T3 Connect service.",
+  "author": {
+    "name": "p0code",
+    "url": "https://github.com/p0code"
+  },
+  "repoUrl": "https://github.com/p0code/t3-connect-bridge",
+  "homepage": "https://github.com/p0code/t3-connect-bridge",
   "license": "NOASSERTION",
-  "official": true
+  "categories": [
+    "connectivity",
+    "mobile"
+  ],
+  "tags": [
+    "t3-connect",
+    "relay",
+    "push"
+  ],
+  "screenshotUrls": [],
+  "latestVersion": "0.1.0",
+  "versions": [
+    {
+      "version": "0.1.0",
+      "bundleUrl": "https://p0code.github.io/plugins-shop/bundles/t3-connect-bridge-0.1.0.tgz",
+      "sha256": "2bb0d20411c41cc02f51c4bfa495c60d832e4b4ad180fb12c97a328287e86bdb",
+      "capabilities": [
+        "network:outbound",
+        "process:spawn",
+        "http:routes",
+        "auth:issue-device-credentials",
+        "orchestration:read-activity"
+      ],
+      "sizeBytes": 16147,
+      "publishedAt": "2026-11-27T00:00:00.000Z"
+    }
+  ],
+  "source": "official",
+  "verified": true
 }

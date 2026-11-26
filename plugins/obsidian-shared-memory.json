@@ -3,12 +3,39 @@
   "id": "obsidian-shared-memory",
   "name": "Obsidian shared memory",
   "description": "Syncs a shared agent memory folder through Obsidian Sync (Obsidian Headless) and tells every agent turn where it is, so agents on all your machines read and add to the same notes.",
-  "author": { "name": "p0code", "url": "https://github.com/p0code" },
-  "repository": "https://github.com/p0code/obsidian-sync",
-  "ref": "d7b9ed0715cf6a4e4e8a2866463ac74c74afbfbf",
-  "version": "0.1.0",
-  "capabilities": ["network:outbound", "process:spawn", "agent:instructions"],
-  "externalServices": ["Obsidian Sync"],
+  "longDescription": "Runs a shared memory folder through Obsidian Headless so every p0code machine reads and writes the same notes. Agents get the folder's location in each turn and can add to it without a separate sync client.",
+  "author": {
+    "name": "p0code",
+    "url": "https://github.com/p0code"
+  },
+  "repoUrl": "https://github.com/p0code/obsidian-sync",
+  "homepage": "https://github.com/p0code/obsidian-sync",
   "license": "NOASSERTION",
-  "official": true
+  "categories": [
+    "memory",
+    "sync"
+  ],
+  "tags": [
+    "obsidian",
+    "notes",
+    "agents"
+  ],
+  "screenshotUrls": [],
+  "latestVersion": "0.1.0",
+  "versions": [
+    {
+      "version": "0.1.0",
+      "bundleUrl": "https://p0code.github.io/plugins-shop/bundles/obsidian-shared-memory-0.1.0.tgz",
+      "sha256": "535830a4b7133b8f56bd48678c6b41ad3cb8fd1ac2b03ee3e64abc6c82585e30",
+      "capabilities": [
+        "network:outbound",
+        "process:spawn",
+        "agent:instructions"
+      ],
+      "sizeBytes": 13728,
+      "publishedAt": "2026-11-27T00:00:00.000Z"
+    }
+  ],
+  "source": "official",
+  "verified": true
 }
