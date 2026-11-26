@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/plugin.schema.json",
+  "id": "sleep-guard",
+  "name": "Sleep Guard",
+  "description": "Keep the host awake during agent work and send Wake-on-LAN packets from this machine.",
+  "author": {
+    "name": "p0code",
+    "url": "https://github.com/p0code"
+  },
+  "repoUrl": "https://github.com/p0code/sleep-guard",
+  "license": "MIT",
+  "categories": [
+    "host"
+  ],
+  "tags": [
+    "keep-awake",
+    "wake-on-lan"
+  ],
+  "latestVersion": "0.1.0",
+  "versions": [
+    {
+      "version": "0.1.0",
+      "bundleUrl": "https://github.com/p0code/sleep-guard/releases/download/v0.1.0/sleep-guard-0.1.0.tgz",
+      "sha256": "fd03d75dbb241270f5beaf59bc0628da1c2fecb10199793be2f73083ec17a3a8",
+      "apiVersion": 1,
+      "capabilities": [
+        "process:spawn",
+        "orchestration:read-activity",
+        "network:outbound",
+        "agent:instructions"
+      ],
+      "sizeBytes": 4616,
+      "publishedAt": "2026-11-26T19:01:01.803Z"
+    }
+  ],
+  "source": "official",
+  "verified": true,
+  "longDescription": "Keeps the machine running the p0code server awake while any listed thread is working or waiting, and releases the assertion after an idle grace period (60 seconds by default). Includes an authenticated action for sending Wake-on-LAN packets from that server. A sleeping Mac cannot wake itself: install Sleep Guard on another always-on machine on the same LAN to wake it.",
+  "homepage": "https://github.com/p0code/sleep-guard"
+}

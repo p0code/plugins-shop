@@ -1,7 +1,7 @@
 # p0code plugin shop
 
 The catalog behind the **Shop** tab on p0code's Plugins settings page. Each plugin lives in its own
-GitHub repo; this repo only lists them, pinned to a reviewed ref. p0code reads one file:
+GitHub repo; this repo lists installable releases, pinned by SHA-256. p0code reads one file:
 
 ```
 https://p0code.github.io/plugins-shop/index.json
@@ -12,85 +12,107 @@ https://p0code.github.io/plugins-shop/index.json
 > are declarations shown before you enable a plugin, and only some are enforced by the host. Install
 > only plugins whose code you trust, Official or not.
 
-## Official and Community
+## What the host does with an entry
 
-A plugin is **Official** (`"official": true`) only when its repo is owned by the
-[`p0code`](https://github.com/p0code) or [`jsserve-org`](https://github.com/jsserve-org) GitHub
-orgs. Every other plugin is **Community**. The build rejects an entry whose flag does not match the
-repo owner, so the badge cannot be claimed.
+Catalog entries are metadata. Before any plugin code runs, p0code downloads the bundle, checks its
+SHA-256 against `sha256`, reads `manifest.json` and refuses a bundle whose id, version, capabilities
+or `apiVersion` differ from the entry, then asks you to consent to every declared capability. An
+entry's version list is also filtered by `apiVersion`, so an old p0code never installs a release it
+cannot run.
 
-## List a plugin
+`verified` means the repo is owned by [`p0code`](https://github.com/p0code). It is a publisher
+badge, not a security audit. `source` is `official` for `p0code` and `jsserve-org` repos and
+`community` for everything else. The build rejects an entry that claims either badge without the
+matching owner.
 
-Open a PR that adds `plugins/<id>.json`, where `<id>` is your manifest's `id`:
+## Entry format
+
+`plugins/<id>.json` follows [`schema/plugin.schema.json`](schema/plugin.schema.json):
 
 ```json
 {
   "$schema": "../schema/plugin.schema.json",
-  "id": "my-plugin",
-  "name": "My plugin",
-  "description": "One or two sentences shown in the Shop.",
+  "id": "sleep-guard",
+  "name": "Sleep Guard",
+  "description": "One or two sentences shown on the card.",
+  "longDescription": "A paragraph shown on the detail page.",
   "author": { "name": "you", "url": "https://github.com/you" },
-  "repository": "https://github.com/you/my-plugin",
-  "ref": "0123456789abcdef0123456789abcdef01234567",
-  "version": "0.1.0",
-  "capabilities": ["network:outbound", "usage:read"],
-  "externalServices": ["api.example.com"],
+  "repoUrl": "https://github.com/you/sleep-guard",
+  "homepage": "https://github.com/you/sleep-guard",
   "license": "MIT",
-  "official": false,
-  "homepage": "https://example.com",
-  "icon": "https://example.com/icon.png",
-  "screenshots": ["https://example.com/shot.png"]
+  "categories": ["host"],
+  "tags": ["power"],
+  "iconUrl": "https://example.com/icon.png",
+  "screenshotUrls": ["https://example.com/shot.png"],
+  "latestVersion": "0.1.0",
+  "versions": [
+    {
+      "version": "0.1.0",
+      "bundleUrl": "https://p0code.github.io/plugins-shop/bundles/sleep-guard-0.1.0.tgz",
+      "sha256": "0123...cdef",
+      "capabilities": ["network:outbound"],
+      "sizeBytes": 12345,
+      "publishedAt": "2026-11-27T00:00:00.000Z"
+    }
+  ],
+  "source": "community",
+  "verified": false
 }
 ```
 
-- `ref` is a full commit SHA (preferred) or a tag; branches are refused. To ship an update, open a PR
-  that bumps `ref` and `version`.
-- `version`, `capabilities` and `externalServices` are copied from your manifest at `ref`.
-- `capabilities` accepts the app's full set: `network:outbound`, `process:spawn`, `http:routes`,
-  `auth:issue-device-credentials`, `orchestration:read-activity`, `usage:read`,
-  `agent:instructions`, and `data:backup` (allowed ahead of its host API). Unknown capabilities are
-  rejected.
-- `path` is the folder holding the plugin's `package.json`, if it is not the repo root.
-- `license` is an SPDX expression, or `NOASSERTION` when the repo has none.
-- `homepage`, `icon` and `screenshots` are optional `https://` URLs.
+- `versions` is append-only; `latestVersion` must be the newest one.
+- `bundleUrl` is an HTTPS `.tgz` or `.zip` whose root (or `dist/`) holds `manifest.json` and
+  `plugin.mjs`. It can be a GitHub release asset or a file in this repo's `bundles/` folder.
+- `sha256` covers the bundle bytes. `sizeBytes` must match too.
+- `capabilities` must equal the manifest's capabilities; `apiVersion`, when present, must equal the
+  manifest's. The build reads both out of the bundle and refuses a mismatch.
 
-The full rules are in [`schema/plugin.schema.json`](schema/plugin.schema.json).
+## Publishing a release
 
-### What the build checks
-
-`pnpm build` validates every entry against the schema, then, for each repo it can reach on GitHub:
-
-- `ref` exists as a commit or tag;
-- the `package.json` entry (`exports["."]`, else `main`, else `src/index.ts`) contains a
-  `definePlugin({ manifest: { ... } })` whose `id`, `version`, `capabilities` and `externalServices`
-  match the entry.
-
-The manifest is read without running your code, so keep those four fields as literals (the `id` may
-be a string constant from a relative import). An unreachable repo is skipped with a warning.
-
-Run it locally:
+Build the plugin the way the p0code installer expects (`manifest.json` + `plugin.mjs`, zipped as
+`.tgz` or `.zip`), then add it:
 
 ```sh
 pnpm install
-GITHUB_TOKEN=$(gh auth token) pnpm build   # writes dist/index.json
+node scripts/publish.ts \
+  --bundle ./sleep-guard-0.1.0.tgz \
+  --repo https://github.com/p0code/sleep-guard \
+  --license MIT \
+  --categories host,power \
+  --long-description "Keeps the p0code server awake while agents work."
+pnpm build   # validates bundles, checksums and manifests; writes dist/index.json
 ```
 
-PRs are checked by GitHub Actions; merging to `main` publishes `dist/` to GitHub Pages.
+`publish.ts` reads the manifest inside the bundle, computes the checksum and size, copies a local
+bundle to `bundles/<id>-<version>.tgz` and updates (or creates) `plugins/<id>.json`. Pass a release
+asset URL instead of a path to leave the file on the plugin repo:
+
+```sh
+node scripts/publish.ts --bundle https://github.com/you/plugin/releases/download/v1.2.0/plugin.tgz \
+  --repo https://github.com/you/plugin --license MIT --categories community
+```
+
+The build fetches remote bundles and reruns the same checks. PRs are checked by GitHub Actions;
+merging to `main` publishes `dist/` (including `bundles/`) to GitHub Pages.
+
+## Current entries
+
+`backup`, `obsidian-shared-memory` and `t3-connect-bridge` have prebuilt bundles in `bundles/`.
+The other first-party plugins do not have an installable bundle yet and are not listed:
+`tokscale-auto-publish-plugin` (no release asset and no checkout to build from),
+`sleep-guard` (no release asset; source-only mount), and `deploy-vercel` /
+`deploy-cloudflare` (no p0code-owned GitHub repo yet; both are local copies of plugin-template).
+Add them with `publish.ts` once their bundles are built.
 
 ## index.json
 
 ```json
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-11-25T00:00:00.000Z",
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-27T00:00:00.000Z",
   "plugins": [ /* entries as above, without $schema, sorted by id */ ]
 }
 ```
 
-`schemaVersion` changes only when an existing field changes meaning or is removed; new optional
-fields may appear without a bump. The entry schema is also served at
-`https://p0code.github.io/plugins-shop/plugin.schema.json`.
-
-## License
-
-MIT. See [LICENSE](LICENSE).
+`schemaVersion` changes only when an existing field changes meaning or is removed. The entry schema
+is also served at `https://p0code.github.io/plugins-shop/plugin.schema.json`.

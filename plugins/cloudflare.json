@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/plugin.schema.json",
+  "id": "cloudflare",
+  "name": "Cloudflare",
+  "description": "Deploy Cloudflare Pages and Workers from p0code using a least-privilege Cloudflare API token.",
+  "author": {
+    "name": "p0code",
+    "url": "https://github.com/p0code"
+  },
+  "repoUrl": "https://github.com/p0code/deploy-cloudflare",
+  "license": "MIT",
+  "categories": [
+    "deploy"
+  ],
+  "tags": [
+    "cloudflare",
+    "workers",
+    "pages"
+  ],
+  "latestVersion": "0.3.0",
+  "versions": [
+    {
+      "version": "0.3.0",
+      "bundleUrl": "https://github.com/p0code/deploy-cloudflare/releases/download/v0.3.0/deploy-cloudflare-0.3.0.tgz",
+      "sha256": "ea1bf042bb138f2106cfa3f3cdea9c8fcdacc249359973f81e19bf8a5b16b6a2",
+      "apiVersion": 1,
+      "capabilities": [
+        "deploy:provider",
+        "network:outbound"
+      ],
+      "sizeBytes": 14751,
+      "publishedAt": "2026-11-26T19:01:00.287Z"
+    }
+  ],
+  "source": "official",
+  "verified": true,
+  "longDescription": "Deploys Cloudflare Pages projects and Workers scripts from p0code using a least-privilege Cloudflare API token. It appears in Settings - Deploy, where p0code owns the UI, project mappings and approvals. Unofficial: not made or endorsed by Cloudflare.",
+  "homepage": "https://github.com/p0code/deploy-cloudflare"
+}

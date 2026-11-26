@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/plugin.schema.json",
+  "id": "tokscale-auto-publish",
+  "name": "Tokscale auto-publish",
+  "description": "Publishes your daily token and cost totals per model to the Tokscale leaderboard. Prompts, code, thread titles, project names and file paths are never sent.",
+  "author": {
+    "name": "p0code",
+    "url": "https://github.com/p0code"
+  },
+  "repoUrl": "https://github.com/p0code/tokscale-auto-publish-plugin",
+  "license": "MIT",
+  "categories": [
+    "usage"
+  ],
+  "tags": [
+    "tokscale",
+    "leaderboard",
+    "usage"
+  ],
+  "latestVersion": "0.1.0",
+  "versions": [
+    {
+      "version": "0.1.0",
+      "bundleUrl": "https://github.com/p0code/tokscale-auto-publish-plugin/releases/download/v0.1.0/tokscale-auto-publish-0.1.0.tgz",
+      "sha256": "2bc0b050c900d1aba091b3829cc907c1ffe64be62dde7151e18f08b8401e6097",
+      "capabilities": [
+        "network:outbound",
+        "usage:read"
+      ],
+      "sizeBytes": 7812,
+      "publishedAt": "2026-11-26T19:01:02.727Z"
+    }
+  ],
+  "source": "official",
+  "verified": true,
+  "longDescription": "Publishes your daily token and cost totals per model to the Tokscale leaderboard (tokscale.ai) on a schedule. It sends only the numbers p0code already shows on its Usage page; prompts, code, thread titles, project names and file paths are never sent. Off by default: sign in with a device code or a Tokscale API token. Unofficial: not made or endorsed by Tokscale.",
+  "homepage": "https://github.com/p0code/tokscale-auto-publish-plugin"
+}

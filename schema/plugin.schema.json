@@ -9,13 +9,13 @@
     "name",
     "description",
     "author",
-    "repository",
-    "ref",
-    "version",
-    "capabilities",
-    "externalServices",
+    "repoUrl",
     "license",
-    "official"
+    "categories",
+    "latestVersion",
+    "versions",
+    "source",
+    "verified"
   ],
   "properties": {
     "$schema": { "type": "string" },
@@ -26,6 +26,7 @@
     },
     "name": { "type": "string", "minLength": 1, "pattern": "^\\S(.*\\S)?$" },
     "description": { "type": "string", "minLength": 1, "pattern": "^\\S(.*\\S)?$" },
+    "longDescription": { "type": "string", "minLength": 1 },
     "author": {
       "type": "object",
       "additionalProperties": false,
@@ -35,63 +36,95 @@
         "url": { "type": "string", "format": "uri", "pattern": "^https://" }
       }
     },
-    "repository": {
-      "description": "The GitHub repo holding the plugin.",
+    "repoUrl": {
+      "description": "The GitHub repo holding the plugin source.",
       "type": "string",
       "pattern": "^https://github\\.com/[A-Za-z0-9-]+/[A-Za-z0-9._-]+$"
     },
-    "path": {
-      "description": "Folder inside the repo that holds the plugin's package.json. Omit when it is the repo root.",
-      "type": "string",
-      "pattern": "^[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*$"
-    },
-    "ref": {
-      "description": "A full commit SHA or a tag. Branches are refused.",
-      "type": "string",
-      "pattern": "^[A-Za-z0-9._/-]+$"
-    },
-    "version": {
-      "description": "The manifest version at ref.",
-      "type": "string",
-      "minLength": 1
-    },
-    "capabilities": {
-      "description": "Copied from the manifest at ref.",
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "enum": [
-          "network:outbound",
-          "process:spawn",
-          "http:routes",
-          "auth:issue-device-credentials",
-          "orchestration:read-activity",
-          "usage:read",
-          "agent:instructions",
-          "data:backup"
-        ]
-      }
-    },
-    "externalServices": {
-      "description": "Copied from the manifest at ref.",
-      "type": "array",
-      "uniqueItems": true,
-      "items": { "type": "string", "minLength": 1 }
-    },
+    "homepage": { "type": "string", "format": "uri", "pattern": "^https://" },
     "license": {
       "description": "SPDX expression, or NOASSERTION when the repo has no license.",
       "type": "string",
       "minLength": 1
     },
-    "official": {
-      "description": "True only for repos owned by the p0code or jsserve-org orgs.",
-      "type": "boolean"
+    "categories": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
     },
-    "homepage": { "type": "string", "format": "uri", "pattern": "^https://" },
-    "icon": { "type": "string", "format": "uri", "pattern": "^https://" },
-    "screenshots": {
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "iconUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "screenshotUrls": {
       "type": "array",
       "items": { "type": "string", "format": "uri", "pattern": "^https://" }
+    },
+    "latestVersion": {
+      "description": "Must be the newest entry in versions.",
+      "type": "string",
+      "minLength": 1
+    },
+    "versions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version",
+          "bundleUrl",
+          "sha256",
+          "capabilities",
+          "sizeBytes",
+          "publishedAt"
+        ],
+        "properties": {
+          "version": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
+          "bundleUrl": {
+            "description": "A .tgz or .zip holding manifest.json and plugin.mjs.",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "sha256": {
+            "description": "SHA-256 of the bundle bytes, lowercase hex.",
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "apiVersion": { "type": "integer", "minimum": 1 },
+          "capabilities": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "network:outbound",
+                "process:spawn",
+                "http:routes",
+                "auth:issue-device-credentials",
+                "orchestration:read-activity",
+                "usage:read",
+                "data:backup",
+                "agent:instructions",
+                "deploy:provider"
+              ]
+            }
+          },
+          "sizeBytes": { "type": "integer", "minimum": 0 },
+          "publishedAt": { "type": "string", "minLength": 1 },
+          "releaseNotesUrl": { "type": "string", "format": "uri", "pattern": "^https://" }
+        }
+      }
+    },
+    "source": {
+      "description": "official only for repos owned by p0code or jsserve-org.",
+      "enum": ["official", "community"]
+    },
+    "verified": {
+      "description": "True only for repos owned by p0code. This is a publisher badge, not an audit.",
+      "type": "boolean"
     }
   }
 }

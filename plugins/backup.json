@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/plugin.schema.json",
+  "id": "backup",
+  "name": "Backups",
+  "description": "Backs up your chats, attachments, settings and keybindings to Google Drive or S3-compatible storage, encrypted on this machine with your passphrase.",
+  "longDescription": "Copies the server's state, attachments, settings and keybindings, encrypts the copy on this machine, and uploads only ciphertext to Google Drive or any S3-compatible bucket. Includes scheduled backups, verification, and a restore that p0code confirms before swapping files in on restart.",
+  "author": {
+    "name": "p0code",
+    "url": "https://github.com/p0code"
+  },
+  "repoUrl": "https://github.com/p0code/backup",
+  "homepage": "https://github.com/p0code/backup",
+  "license": "MIT",
+  "categories": [
+    "backup",
+    "data"
+  ],
+  "tags": [
+    "encrypted",
+    "google-drive",
+    "s3"
+  ],
+  "screenshotUrls": [],
+  "latestVersion": "0.1.0",
+  "versions": [
+    {
+      "version": "0.1.0",
+      "bundleUrl": "https://p0code.github.io/plugins-shop/bundles/backup-0.1.0.tgz",
+      "sha256": "3cb025ab6f94c4d08c70b7d535b28c09611dc83b383dab8b291174458405fd14",
+      "capabilities": [
+        "network:outbound",
+        "data:backup"
+      ],
+      "sizeBytes": 17517,
+      "publishedAt": "2026-11-26T17:43:26.242Z"
+    }
+  ],
+  "source": "official",
+  "verified": true
+}

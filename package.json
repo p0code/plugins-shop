@@ -4,7 +4,8 @@
   "type": "module",
   "packageManager": "pnpm@10.28.2",
   "scripts": {
-    "build": "node scripts/build.ts"
+    "build": "node scripts/build.ts",
+    "publish": "node scripts/publish.ts"
   },
   "devDependencies": {
     "ajv": "^8.20.0",

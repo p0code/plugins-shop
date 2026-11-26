@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/plugin.schema.json",
+  "id": "vercel",
+  "name": "Vercel",
+  "description": "Deploy p0code projects to Vercel via Git or local builds, stream build logs, list domains, set environment variables, and roll back production releases.",
+  "author": {
+    "name": "p0code",
+    "url": "https://github.com/p0code"
+  },
+  "repoUrl": "https://github.com/p0code/deploy-vercel",
+  "license": "MIT",
+  "categories": [
+    "deploy"
+  ],
+  "tags": [
+    "vercel",
+    "deploy"
+  ],
+  "latestVersion": "0.2.0",
+  "versions": [
+    {
+      "version": "0.2.0",
+      "bundleUrl": "https://github.com/p0code/deploy-vercel/releases/download/v0.2.0/deploy-vercel-0.2.0.tgz",
+      "sha256": "5c3d977b442b818b930a734208b46d20d0842e1f6b331566c37a381e40f979c6",
+      "apiVersion": 1,
+      "capabilities": [
+        "deploy:provider",
+        "network:outbound"
+      ],
+      "sizeBytes": 9695,
+      "publishedAt": "2026-11-26T19:00:57.751Z"
+    }
+  ],
+  "source": "official",
+  "verified": true,
+  "longDescription": "Deploys p0code projects to Vercel through Git integrations or local builds, streams build logs, manages domains and environment variables, and can roll production back to a previous release. Requires Deploy host v2. Each host account links its own Vercel personal access token under Settings - Deploy; deployments consume your Vercel plan usage.",
+  "homepage": "https://github.com/p0code/deploy-vercel"
+}
